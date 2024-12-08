@@ -10,16 +10,16 @@
 ## ScreenShots
 
 ### HomePage
-![public/HomePage.png]
-![public/HomePageWithData.png]
-![public/HomePageWithData2.png]
+![HomePage](public/HomePage.png)
+![HomePageWithData](public/HomePageWithData.png)
+![HomePageWithData2](public/HomePageWithData2.png)
 ### Video Play Page
-![public/VideoPlay.png]
+![VideoPlay](public/VideoPlay.png)
 ### Upload Page
-![public/VIdeoUploadForm.png]
+![VIdeoUploadForm](public/VIdeoUploadForm.png)
 ### FileFormated
-![public/FileFormatError.png]
-![public/uploadFileError.png]
+![FileFormatError](public/FileFormatError.png)
+![uploadFileError](public/uploadFileError.png)
 ### SucessFull 
-![public/Upload.png]
-![public/Sucess.png]
+![Upload](public/Upload.png)
+![Sucess](public/Sucess.png)
