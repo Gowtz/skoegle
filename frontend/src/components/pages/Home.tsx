@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import Header from "../customComponents/Header";
 import VideoUpload from "./VideoUpload";
 import VideoList from "../customComponents/VideoList";
+import { Toaster } from "../ui/toaster";
 
 export default function Home() {
   const [uploadView, setUploadView] = useState<boolean>(false);
@@ -18,6 +19,7 @@ export default function Home() {
   return (
     <>
       <Header handleUploadView={handleUploadView} handleVideoUpload={handleVideoUpload} />
+      <Toaster />
       {uploadView && <VideoUpload />}
       {videoView && (
         <>

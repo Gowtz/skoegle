@@ -1,16 +1,13 @@
 import { fileupload } from "../middleware/multer.js";
 import Video from "../model/video.js";
+import AWS from "aws-sdk";
 export async function getVideoByDateRange(req, res) {
-  const a = new Date(2024,11,9); // Start date
-  const b = new Date(2024,11,14); // Start date
-  console.log(a)
-
+  const { from, to } = req.body;
   Video.find({
-    startTime: { $gte: a },
-    endTime:{$lte:b}
+    startTime: { $gte: from },
+    endTime: { $lte: to },
   })
     .then((videos) => {
-      console.log("Videos found:", videos);
 
       res.send(videos);
     })
@@ -18,8 +15,30 @@ export async function getVideoByDateRange(req, res) {
       console.error("Error finding videos:", err);
     });
 }
+
 export async function getVideoById(req, res) {
-  res.json({ msg: "Hellor" });
+  const query = req.query;
+  const s3 = new AWS.S3();
+  const key = `video/${query.id}.mp4`.replaceAll("\"","");
+  try {
+    const params = {
+      Bucket: process.env.BUCKET_ID,
+      Key: key,
+      Expires: 60 * 5, // 5 minutes
+    };
+    await s3
+      .headObject({
+        Bucket: process.env.BUCKET_ID,
+        Key: `video/${query.id}.mp4`,
+      })
+      .promise();
+    const url = s3.getSignedUrl("getObject", params);
+
+    res.json({ msg: "Gotcha", URL: url });
+  } catch (err) {
+    console.log(`S3 Fetch Error \n ${err}`);
+    res.status(502).json({ error: `Error File ${err.code}` });
+  }
 }
 
 export const uploadVideo = async (req, res) => {

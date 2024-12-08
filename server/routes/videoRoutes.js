@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { uploadVIDEO } from "../middleware/multer.js";
-import { getVideoByDateRange, uploadVideo } from "../controller/videoController.js";
+import { getVideoByDateRange, getVideoById, uploadVideo } from "../controller/videoController.js";
 
 const router = Router();
 
@@ -9,6 +9,8 @@ const router = Router();
 router.post("/upload", uploadVIDEO, uploadVideo);
 
 
-router.get('/getvideobyrange',getVideoByDateRange)
+router.post('/getvideobyrange',getVideoByDateRange)
+
+router.get('/getvidbyid',getVideoById)
 
 export default router;

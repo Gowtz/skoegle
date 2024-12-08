@@ -1,53 +1,5 @@
-const VideoData:VideoDataType[] = [
-  {
-    title: "asdadas",
-    videoUrl: "asdadsa",
-  },
-  {
-    title: "asdadas",
-    videoUrl: "asdadsa",
-  },
-  {
-    title: "asdadas",
-    videoUrl: "asdadsa",
-  },
-  {
-    title: "asdadas",
-    videoUrl: "asdadsa",
-  },
-  {
-    title: "asdadas",
-    videoUrl: "asdadsa",
-  },
-  {
-    title: "asdadas",
-    videoUrl: "asdadsa",
-  },
-  {
-    title: "asdadas",
-    videoUrl: "asdadsa",
-  },
-  {
-    title: "asdadas",
-    videoUrl: "asdadsa",
-  },
-  {
-    title: "asdadas",
-    videoUrl: "asdadsa",
-  },
-  {
-    title: "asdadas",
-    videoUrl: "asdadsa",
-  },
-  {
-    title: "asdadas",
-    videoUrl: "asdadsa",
-  },
-];
-
-
 export type VideoDataType = {
-  title:string
-  videoUrl:string
+  fileName:string
+  startTime:Date
+  endTime:Date
 }
-export default VideoData;

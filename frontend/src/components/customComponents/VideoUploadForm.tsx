@@ -2,7 +2,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import axios from "axios";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
+
+
 import {
   Form,
   FormControl,
@@ -10,29 +12,31 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
+} from "../ui/form";
+import { Input } from "../ui/input";
+import { useState } from "react";
 import { fileSchema } from "../../lib/type";
 import { useToast } from "../../hooks/use-toast";
+import { BACKEND_URL } from "../../lib/utils";
 
 export default function VideoUploadForm() {
-  const BACKEND_URL = "http://localhost:6969/";
   const { toast } = useToast();
   // 1. Define your form.
   const form = useForm<z.infer<typeof fileSchema>>({
     resolver: zodResolver(fileSchema),
+//@ts-ignore
     defaultValues:null
   });
 
   const [video, setVideo] = useState<string | null>(null);
-  const [clear,setClear] = useState<string | null>(null);
+  const [clear,setClear] = useState<number >(0);
 // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof fileSchema>) {
     const formData = new FormData();
     formData.append("video", values.file);
     axios
       .post(`${BACKEND_URL}api/v1/upload`, formData)
+//@ts-ignore
       .then((res) => {
         toast({
           title: "Sucess",
@@ -76,7 +80,7 @@ export default function VideoUploadForm() {
                       field.onChange(event.target.files?.[0]);
                       if (event.target.files && event.target.files[0]) {
                         const file = event.target.files[0];
-                        setVideo(prev =>  URL.createObjectURL(file));
+                        setVideo(() =>  URL.createObjectURL(file));
                       }
                     }}
                   />

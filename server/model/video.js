@@ -16,7 +16,6 @@ const videoScheme = new mongoose.Schema({
 videoScheme.pre("save", async function(next) {
   const time = this.fileName.replace('video/','').replace('.mp4','' ).split('-');
   
-  console.log(time)
   const startDate = parseInt(time[0].substring(0, 2), 10);
   const startMonth = parseInt(time[0].substring(2, 4), 10) - 1;
   const startYear = parseInt(time[0].substring(4, 8), 10);
@@ -30,14 +29,6 @@ videoScheme.pre("save", async function(next) {
   const endHour = parseInt(time[1].substring(8, 10), 10);
   const endMinute = parseInt(time[1].substring(10, 12), 10);
   const endSeconds = parseInt(time[1].substring(12, 14), 10);
-  console.log(
-    startYear,
-    startMonth,
-    startDate,
-    startHour,
-    startMinute,
-    startSeconds,
-  );
 
   this.startTime = new Date(
     startYear,
@@ -47,7 +38,6 @@ videoScheme.pre("save", async function(next) {
     startMinute,
     startSeconds,
   );
-  console.log(this.startTime);
   this.endTime = new Date(
     endYear,
     endMonth,

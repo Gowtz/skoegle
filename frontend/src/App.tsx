@@ -1,11 +1,18 @@
 import Home from "./components/pages/Home";
-import { Toaster } from "./components/ui/toaster";
+import { BrowserRouter, Routes, Route } from "react-router";
+import VideoPlay from "./components/pages/VideoPlay";
 
 export default function App() {
   return (
     <>
-      <Home />
-      <Toaster />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/video/:id" element={<VideoPlay />} />
+
+        </Routes>
     </>
   );
 }
+
+
+
