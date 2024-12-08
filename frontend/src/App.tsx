@@ -1,5 +1,5 @@
 import Home from "./components/pages/Home";
-import { BrowserRouter, Routes, Route } from "react-router";
+import { Routes, Route } from "react-router";
 import VideoPlay from "./components/pages/VideoPlay";
 
 export default function App() {
