@@ -13,6 +13,7 @@ export default function VideoPlay() {
       .get(`${BACKEND_URL}/api/v1/getvidbyid?id=${params.id}`)
       .then((res) => {
         setVideoUrl(res.data.URL);
+        console.log(res.data.URL)
       })
       .catch((res) => console.log(res));
   }, []);
