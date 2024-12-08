@@ -3,19 +3,25 @@ import VideoData, { VideoDataType } from "../../sample";
 import { DatePickerWithRange } from "../ui/date-picker";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
+import { DateRange } from "react-day-picker";
 export default function VideoList() {
   const [data, setData] = useState<VideoDataType[] | null>();
-
+  const [dateValue,setDateValue] = useState<DateRange | undefined>()
+  function handleSubmit(e) {
+    e.preventDefault()
+    alert(JSON.stringify(dateValue))
+    
+  }
   return (
     <>
       <div className="container lg:w-10/12 mx-auto mt-28">
         <form
-          action=""
+          onSubmit={handleSubmit}
           className="mb-16 text-center flex  flex-col items-center justify-center gap-5"
         >
           <Label className="text-xl ">Pick a date</Label>
           <div className="flex gap-5">
-            <DatePickerWithRange />
+            <DatePickerWithRange onChangeDate={setDateValue}/>
             <Button type="submit">Submit</Button>
           </div>
         </form>
