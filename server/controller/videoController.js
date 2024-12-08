@@ -1,11 +1,22 @@
 import { fileupload } from "../middleware/multer.js";
 import Video from "../model/video.js";
-export async function getAllVideo(req, res) {
-Video.find({
-  startTime: { $gte: a },
-  endTime: { $lte: b }
-})
-  res.send("Gotcha");
+export async function getVideoByDateRange(req, res) {
+  const a = new Date(2024,11,9); // Start date
+  const b = new Date(2024,11,14); // Start date
+  console.log(a)
+
+  Video.find({
+    startTime: { $gte: a },
+    endTime:{$lte:b}
+  })
+    .then((videos) => {
+      console.log("Videos found:", videos);
+
+      res.send(videos);
+    })
+    .catch((err) => {
+      console.error("Error finding videos:", err);
+    });
 }
 export async function getVideoById(req, res) {
   res.json({ msg: "Hellor" });

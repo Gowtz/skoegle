@@ -6,34 +6,56 @@ const videoScheme = new mongoose.Schema({
     require: true,
   },
   startTime: {
-    type:Date,
+    type: Date,
   },
   endTime: {
-    type:Date,
+    type: Date,
   },
 });
 
 videoScheme.pre("save", async function(next) {
-  const time = this.fileName
-    .replace("video/", "")
-    .replace(".mp4", "")
-    .split("-");
-  const startDate = time[0].slice(0, 2);
-  const startMonth = time[0].slice(2, 4);
-  const startYear = time[0].slice(4, 8);
-  const startHour = time[0].slice(4, 8);
-  const startMinute = time[0].slice(4, 8);
-  const startSeconds = time[0].slice(4, 8);
+  const time = this.fileName.replace('video/','').replace('.mp4','' ).split('-');
+  
+  console.log(time)
+  const startDate = parseInt(time[0].substring(0, 2), 10);
+  const startMonth = parseInt(time[0].substring(2, 4), 10) - 1;
+  const startYear = parseInt(time[0].substring(4, 8), 10);
+  const startHour = parseInt(time[0].substring(8, 10), 10);
+  const startMinute = parseInt(time[0].substring(10, 12), 10);
+  const startSeconds = parseInt(time[0].substring(12, 14), 10);
 
-  const endDate = time[1].slice(0, 2);
-  const endMonth = time[1].slice(2, 4);
-  const endYear = time[1].slice(4, 8);
-  const endHour= time[0].slice(4, 8);
-  const endMinute = time[0].slice(4, 8);
-  const endSeconds = time[0].slice(4, 8);
+  const endDate = parseInt(time[1].substring(0, 2), 10);
+  const endMonth = parseInt(time[1].substring(2, 4), 10) - 1;
+  const endYear = parseInt(time[1].substring(4, 8), 10);
+  const endHour = parseInt(time[1].substring(8, 10), 10);
+  const endMinute = parseInt(time[1].substring(10, 12), 10);
+  const endSeconds = parseInt(time[1].substring(12, 14), 10);
+  console.log(
+    startYear,
+    startMonth,
+    startDate,
+    startHour,
+    startMinute,
+    startSeconds,
+  );
 
-  this.startTime = new Date(startYear,startMonth,startDate,startHour,startMinute,startSeconds)
-  this.endTime = new Date(endYear,endMonth,endDate,endHour,endMinute,endSeconds);
+  this.startTime = new Date(
+    startYear,
+    startMonth,
+    startDate,
+    startHour,
+    startMinute,
+    startSeconds,
+  );
+  console.log(this.startTime);
+  this.endTime = new Date(
+    endYear,
+    endMonth,
+    endDate,
+    endHour,
+    endMinute,
+    endSeconds,
+  );
   next();
 });
 
