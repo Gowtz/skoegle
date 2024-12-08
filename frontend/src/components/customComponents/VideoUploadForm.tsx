@@ -46,7 +46,7 @@ export default function VideoUploadForm() {
           title: "Server Error",
           description: "Video Upload failed in the server",
         });
-        console.log(res.data);
+        console.log(res.message);
       });
   }
   return (
