@@ -35,7 +35,7 @@ export default function VideoUploadForm() {
     const formData = new FormData();
     formData.append("video", values.file);
     axios
-      .post(`${BACKEND_URL}api/v1/upload`, formData)
+      .post(`${BACKEND_URL}/api/v1/upload`, formData)
 //@ts-ignore
       .then((res) => {
         toast({
