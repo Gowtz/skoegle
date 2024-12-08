@@ -14,10 +14,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { fileSchema } from "../../lib/type";
+import { useToast } from "../../hooks/use-toast";
 
 export default function VideoUploadForm() {
   const BACKEND_URL = "http://localhost:6969/";
-
+  const { toast } = useToast();
   // 1. Define your form.
   const form = useForm<z.infer<typeof fileSchema>>({
     resolver: zodResolver(fileSchema),
@@ -32,7 +33,21 @@ export default function VideoUploadForm() {
     formData.append("video", values.file);
     axios
       .post(`${BACKEND_URL}api/v1/upload`, formData)
-      .then((res) => console.log(res.data));
+      .then((res) => {
+        console.log(res.data);
+        toast({
+          title: "Sucess",
+          description: "Video Uploaded sucess fully",
+        });
+      })
+      .catch((res) => {
+        toast({
+          variant: "destructive",
+          title: "Server Error",
+          description: "Video Upload failed in the server",
+        });
+        console.log(res.data);
+      });
   }
   return (
     <div className="container w-10/12 mx-auto">
