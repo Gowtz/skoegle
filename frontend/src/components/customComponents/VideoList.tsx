@@ -11,9 +11,10 @@ export default function VideoList() {
   const [data, setData] = useState<VideoDataType[] | null>();
   const [dateValue, setDateValue] = useState<DateRange | undefined>();
   function handleSubmit(e:any) {
+    console.log(BACKEND_URL)
     e.preventDefault();
     axios
-      .post(`${BACKEND_URL}api/v1/getvideobyrange`, dateValue)
+      .post(`${BACKEND_URL}/api/v1/getvideobyrange`, dateValue)
       .then((res) => setData(res.data));
   }
   return (
