@@ -1,6 +1,7 @@
 import multer from "multer";
 
 import AWS from "aws-sdk";
+import Video from "../model/video.js";
 
 // AWS config
 AWS.config.update({
@@ -31,6 +32,7 @@ const fileupload = async (file, res, key) => {
     Body: file.buffer,
   };
   try {
+    const response = await Video.create({fileName:filename})
     const data = await s3.upload(params).promise();
     res.send({
       msg: "Gotcha",
